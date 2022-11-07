@@ -1,0 +1,83 @@
+﻿@model FuncionesLinq.Models.Inscritos
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Inscritos</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Addby" class="control-label"></label>
+                
+                @if(ViewBag.usuariosQty > 0)
+                {
+                        <select asp-for="Addby" class="form-select form-control">
+                        @foreach (var usuario in ViewBag.usuarios)
+                        {
+                            <option value="@usuario.Id">@usuario.Name</option>
+                        }
+                    </select>
+                }else
+                {
+                    <p>Debes agregar un administrador</p>
+                }
+                <span asp-validation-for="Addby" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idalumno" class="control-label"></label>
+                @if(ViewBag.alumnosQty > 0)
+                {
+                        <select asp-for="Idalumno" class="form-select form-control">
+                        @foreach (var alumno in ViewBag.alumnos)
+                        {
+                            <option value="@alumno.Id">@alumno.Name</option>
+                        }
+                    </select>
+                }else
+                {
+                    <p>Debes agregar un alumno</p>
+                }
+                <span asp-validation-for="Idalumno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Idcurso" class="control-label"></label>
+                @if(ViewBag.cursosQty > 0)
+                {
+                        <select asp-for="Idcurso" class="form-select form-control">
+                        @foreach (var curso in ViewBag.cursos)
+                        {
+                            <option value="@curso.Id">@curso.CursoName</option>
+                        }
+                    </select>
+                }else
+                {
+                    <p>Debes agregar un curso</p>
+                }
+                <span asp-validation-for="Idcurso" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                </label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

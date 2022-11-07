@@ -1,0 +1,67 @@
+﻿@model IEnumerable<FuncionesLinq.Models.Alumno>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Alumnos</h1>
+
+<p>
+    <a asp-action="Create">Crear Alumno</a>
+</p>
+<hr />
+
+<form asp-controller="Alumnos" asp-action="Index">
+<div class="input-group mb-3 w-50">
+        <select name="SearchEdad" class="form-select form-control">
+          <option value=">">Buscar Alumnos mayores de edad</option>
+          <option value="<">buscar Alumnos menores de edad</option>
+          <option value="">Buscar a todos los alumnos</option>
+        </select>
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+</div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Edad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDeleted)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Edad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDeleted)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<br />
+<button class="bg-dark text-white" onclick="history.back()">  <i class="fas fa-arrow-left"></i>  </button>

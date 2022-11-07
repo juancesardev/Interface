@@ -1,0 +1,80 @@
+﻿@model FuncionesLinq.Models.Inscritos
+
+@{
+    ViewData["Title"] = "Categoria";
+}
+
+<h1>Categoria</h1>
+<hr />
+<form asp-controller="Inscritos" asp-action="Categoria">
+<div class="input-group mb-3 w-50">
+        <select name="SearchCategoria" class="form-select form-control">
+          <option value=-1>Todos</option>
+          <option value=0>FrontEnd</option>
+          <option value=1>BackEnd</option>
+          <option value=2>FullStack</option>
+          
+        </select>
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+</div>
+</form>
+<hr />
+<h1 class="text-danger">@ViewBag.msgCursos</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Categoria
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Addby)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idalumno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Idcurso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaAdd)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+@if(ViewBag.listaInscritos != null){
+
+    @foreach (var item in ViewBag.listaInscritos) {
+            <tr>
+                <td>
+                    @item.categoria_
+                </td>
+                <td>
+                    @item.administrador_
+                </td>
+                <td>
+                    @item.alumno_
+                </td>
+                <td>
+                    @item.cursos_
+                </td>
+                <td>
+                    @item.status_ 
+                </td>
+                <td>
+                    @item.fecha_
+                </td>
+@*                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>*@
+            </tr>
+    }
+}
+    </tbody>
+</table>
